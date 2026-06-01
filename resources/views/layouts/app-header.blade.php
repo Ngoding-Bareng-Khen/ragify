@@ -61,16 +61,23 @@
                         variant="custom"
                         size="none"
                         className="flex items-center gap-3 rounded-full border border-gray-200 bg-white px-3 py-2 dark:border-gray-800 dark:bg-gray-900">
-                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-brand-50 text-sm font-semibold text-brand-500 dark:bg-brand-500/20 dark:text-brand-400">R</span>
-                        <span class="hidden text-sm font-medium text-gray-700 dark:text-gray-300 sm:block">Ragify</span>
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-brand-50 text-sm font-semibold text-brand-500 dark:bg-brand-500/20 dark:text-brand-400">{{ substr(auth()->user()->name, 0, 1) }}</span>
+                        <span class="hidden text-sm font-medium text-gray-700 text-nowrap dark:text-gray-300 sm:block">{{ auth()->user()->name }}</span>
                         <i class="fa-solid fa-chevron-down text-xs text-gray-400"></i>
                     </x-ui.button>
                 </x-slot>
 
-                <a href="{{ route('auth.sign-in') }}" class="flex items-center gap-2 rounded-lg px-3 py-2 text-theme-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-white">
-                    <i class="fa-solid fa-right-from-bracket text-gray-400"></i>
-                    Logout
-                </a>
+                <form method="POST" action="{{ route('auth.sign-out') }}">
+                    @csrf
+                    <x-ui.button
+                        type="submit"
+                        variant="custom"
+                        size="none"
+                        className="flex w-full items-center justify-start gap-2 rounded-lg px-3 py-2 text-theme-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-white">
+                        <i class="fa-solid fa-right-from-bracket text-gray-400"></i>
+                        Logout
+                    </x-ui.button>
+                </form>
             </x-ui.dropdown-menu>
         </div>
     </div>

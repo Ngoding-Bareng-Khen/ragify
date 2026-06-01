@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('auth')->group(function () {
     Route::controller(SignInController::class)->group(function () {
         Route::get('/sign-in', 'page')->name('auth.sign-in');
+        Route::post('/sign-in', 'signIn')->name('auth.sign-in.post');
+        Route::post('/sign-out', 'signOut')->name('auth.sign-out');
     });
 });
 
