@@ -8,6 +8,12 @@
                 <div class="mx-auto flex w-full max-w-md flex-1 flex-col justify-center">
                     <div>
                         <div class="mb-5 sm:mb-8">
+                            @if (session('error'))
+                                <div class="mb-5">
+                                    <x-ui.alert variant="error" title="Unauthenticated" :message="session('error')" />
+                                </div>
+                            @endif
+
                             <h1 class="text-title-sm sm:text-title-md mb-2 font-semibold text-gray-800 dark:text-white/90">
                                 Sign In
                             </h1>
@@ -16,9 +22,7 @@
                             </p>
                         </div>
                         <div>
-                            <x-ui.button
-                                variant="custom"
-                                size="none"
+                            <x-ui.button variant="custom" size="none"
                                 className="w-full inline-flex items-center justify-center gap-3 rounded-lg bg-gray-100 px-7 py-3 text-sm font-normal text-gray-700 transition-colors hover:bg-gray-200 hover:text-gray-800 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white/10">
                                 <i class="fa-brands fa-google"></i>
                                 Sign in with Google
@@ -52,8 +56,8 @@
                                                 class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full rounded-lg border border-gray-300 bg-transparent py-2.5 pr-11 pl-4 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30" />
                                             <span @click="showPassword = !showPassword"
                                                 class="absolute top-1/2 right-4 z-30 -translate-y-1/2 cursor-pointer text-gray-500 dark:text-gray-400">
-                                                    <i x-show="!showPassword" class="fa-solid fa-eye"></i>
-                                                    <i x-show="showPassword" class="fa-solid fa-eye-slash"></i>
+                                                <i x-show="!showPassword" class="fa-solid fa-eye"></i>
+                                                <i x-show="showPassword" class="fa-solid fa-eye-slash"></i>
                                             </span>
                                         </div>
                                     </div>
@@ -63,7 +67,8 @@
                                             <label for="checkboxLabelOne"
                                                 class="flex cursor-pointer items-center text-sm font-normal text-gray-700 select-none dark:text-gray-400">
                                                 <div class="relative">
-                                                    <input type="checkbox" id="checkboxLabelOne" class="sr-only" @change="checkboxToggle = !checkboxToggle" />
+                                                    <input type="checkbox" id="checkboxLabelOne" class="sr-only"
+                                                        @change="checkboxToggle = !checkboxToggle" />
                                                     <div :class="checkboxToggle ? 'border-brand-500 bg-brand-500' :
                                                         'bg-transparent border-gray-300 dark:border-gray-700'"
                                                         class="mr-3 flex h-5 w-5 items-center justify-center rounded-md border-[1.25px]">
@@ -75,16 +80,14 @@
                                                 Keep me logged in
                                             </label>
                                         </div>
-                                        <a href="/reset-password" class="text-brand-500 hover:text-brand-600 dark:text-brand-400 text-sm">
+                                        <a href="/reset-password"
+                                            class="text-brand-500 hover:text-brand-600 dark:text-brand-400 text-sm">
                                             Forgot password?
                                         </a>
                                     </div>
                                     <!-- Button -->
                                     <div>
-                                        <x-ui.button
-                                            type="submit"
-                                            variant="primary"
-                                            size="none"
+                                        <x-ui.button type="submit" variant="primary" size="none"
                                             className="flex w-full px-4 py-3 text-sm">
                                             Sign In
                                         </x-ui.button>
@@ -99,7 +102,7 @@
             <div class="bg-brand-950 relative hidden h-full w-full items-center lg:grid lg:w-1/2 dark:bg-white/5">
                 <div class="z-1 flex items-center justify-center">
                     <!-- ===== Common Grid Shape Start ===== -->
-                    <x-common.grid-shape/>
+                    <x-common.grid-shape />
                     <div class="flex max-w-xs flex-col items-center">
                         <a href="/" class="mb-4 block">
                             <img src="/images/logo/auth-logo.svg" alt="Logo" />
