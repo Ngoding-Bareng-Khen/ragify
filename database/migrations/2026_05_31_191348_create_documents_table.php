@@ -13,14 +13,26 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignUuid('user_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
+            $table->uuid('upload_id')->unique();
             $table->string('title');
             $table->text('original_file_name');
             $table->integer('file_size');
-            $table->string('mime_type', 50);
-            $table->string('file_path');
-            $table->enum('status', ['processing', 'completed', 'failed']);
-            $table->timestampTz('uploaded_at');
+            $table->string('mime_type', 100);
+            $table->text('temporary_path')->nullable();
+            $table->text('file_path')->nullable();
+            $table->integer('total_chunks')->nullable();
+            $table->integer('uploaded_chunks')->default(0);
+            $table->enum('status', [
+                'uploading',
+                'processing',
+                'completed',
+                'failed',
+            ])->default('uploading');
+            $table->text('failure_reason')->nullable();
+            $table->timestampTz('uploaded_at')->nullable();
             $table->timestampsTz();
         });
     }
