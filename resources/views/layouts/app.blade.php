@@ -8,7 +8,7 @@
 
     <title>{{ $title ?? 'Dashboard' }} | Ragify</title>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css'])
     <script src="https://kit.fontawesome.com/255fd51aa4.js" crossorigin="anonymous"></script>
 
     <script>
@@ -16,7 +16,8 @@
             Alpine.store('theme', {
                 init() {
                     const savedTheme = localStorage.getItem('theme');
-                    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' :
+                        'light';
                     this.theme = savedTheme || systemTheme;
                     this.updateTheme();
                 },
@@ -88,19 +89,17 @@
     </script>
 </head>
 
-<body
-    x-data="{ loaded: true }"
-    x-init="$store.sidebar.isExpanded = window.innerWidth >= 1280;
-    const checkMobile = () => {
-        if (window.innerWidth < 1280) {
-            $store.sidebar.setMobileOpen(false);
-            $store.sidebar.isExpanded = false;
-        } else {
-            $store.sidebar.isMobileOpen = false;
-            $store.sidebar.isExpanded = true;
-        }
-    };
-    window.addEventListener('resize', checkMobile);">
+<body x-data="{ loaded: true }" x-init="$store.sidebar.isExpanded = window.innerWidth >= 1280;
+const checkMobile = () => {
+    if (window.innerWidth < 1280) {
+        $store.sidebar.setMobileOpen(false);
+        $store.sidebar.isExpanded = false;
+    } else {
+        $store.sidebar.isMobileOpen = false;
+        $store.sidebar.isExpanded = true;
+    }
+};
+window.addEventListener('resize', checkMobile);">
 
     <x-common.preloader />
 
@@ -108,11 +107,10 @@
         @include('layouts.backdrop')
         @include('layouts.sidebar')
 
-        <div
-            class="flex-1 transition-all duration-300 ease-in-out"
+        <div class="flex-1 transition-all duration-300 ease-in-out"
             :class="{
-                'xl:ml-[290px]': $store.sidebar.isExpanded || $store.sidebar.isHovered,
-                'xl:ml-[90px]': !$store.sidebar.isExpanded && !$store.sidebar.isHovered,
+                'xl:ml-72.5': $store.sidebar.isExpanded || $store.sidebar.isHovered,
+                'xl:ml-22.5': !$store.sidebar.isExpanded && !$store.sidebar.isHovered,
                 'ml-0': $store.sidebar.isMobileOpen
             }">
             @include('layouts.app-header')
@@ -124,6 +122,8 @@
     </div>
 
     @stack('scripts')
+
+    @vite(['resources/js/app.js'])
 </body>
 
 </html>

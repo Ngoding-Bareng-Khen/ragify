@@ -14,6 +14,13 @@ class DocumentChunk extends Model
 {
     use HasUuids;
 
+    protected function casts(): array
+    {
+        return [
+            'embedding' => 'array',
+        ];
+    }
+
     // Relationships    
     /**
      * document

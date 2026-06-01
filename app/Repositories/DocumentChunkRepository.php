@@ -13,4 +13,9 @@ class DocumentChunkRepository
      * @return void
      */
     public function __construct(private readonly DocumentChunk $model) {}
+
+    public function create(array $data): DocumentChunk
+    {
+        return $this->model->create($data);
+    }
 }

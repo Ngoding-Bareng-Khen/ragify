@@ -13,4 +13,9 @@ class DocumentRepository
      * @return void
      */
     public function __construct(private readonly Document $model) {}
+
+    public function create(array $data): Document
+    {
+        return $this->model->create($data);
+    }
 }

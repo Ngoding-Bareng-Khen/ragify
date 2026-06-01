@@ -26,6 +26,7 @@ Route::middleware('check-auth')->group(function () {
 
         Route::controller(KnowledgeSourceController::class)->group(function () {
             Route::get('/knowledge-source', 'page')->name('app.knowledge-source');
+            Route::post('/knowledge-source', 'store')->name('app.knowledge-source.store');
         });
     });
 
