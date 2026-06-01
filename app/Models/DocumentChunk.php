@@ -14,13 +14,22 @@ class DocumentChunk extends Model
 {
     use HasUuids;
 
-    // Relationships    
+    // Relationships
     /**
      * document
-     *
-     * @return BelongsTo
      */
-    public function document(): BelongsTo {
+    public function document(): BelongsTo
+    {
         return $this->belongsTo(Document::class);
+    }
+
+    /**
+     * casts
+     */
+    protected function casts(): array
+    {
+        return [
+            'embedding' => 'array',
+        ];
     }
 }

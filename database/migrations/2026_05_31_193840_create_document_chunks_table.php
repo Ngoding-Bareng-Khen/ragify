@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignUuid('document_id')->constrained('documents')->cascadeOnDelete();
             $table->longText('content');
             $table->integer('chunk_index');
-            $table->json('embedding');
+            $table->json('embedding')->nullable();
             $table->timestampsTz();
         });
     }
