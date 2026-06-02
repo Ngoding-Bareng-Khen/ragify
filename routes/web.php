@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\DocumentChunkController;
+use App\Http\Controllers\Api\DocumentController;
 use App\Http\Controllers\Application\AiChatController;
 use App\Http\Controllers\Application\DashboardController;
 use App\Http\Controllers\Application\KnowledgeSourceController;
@@ -15,6 +17,10 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::middleware('check-auth')->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('app.dashboard');
+    });
+
     Route::prefix('app')->group(function () {
         Route::controller(AiChatController::class)->group(function () {
             Route::get('/ai-chat', 'page')->name('app.ai-chat');
@@ -30,8 +36,12 @@ Route::middleware('check-auth')->group(function () {
         });
     });
 
-    Route::get('/', function () {
-        return redirect()->route('app.dashboard');
+    // As API Routes
+    Route::controller(DocumentChunkController::class)->group(function () {
+        Route::post('/api/document-chunks/store-temp', 'storeTemp')->name('api.document-chunk.store-temp');
     });
 
+    Route::controller(DocumentController::class)->group(function () {
+        Route::post('/api/documents/{uploadId}/finalize-upload', 'finalizeUpload')->name('api.document.finalize-upload');
+    });
 });
